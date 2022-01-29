@@ -22,13 +22,13 @@ public class Calculate extends Calculator {
     //Берет первый символ из вводимой строки и ищет этот символ в строке римских числел romanExample, если находит одинаковый символ
     // и в строке отстутствуют числа (с помошью регулярных выражений), возвращает значение true и строка является полностью римским выражением.
     //Если символ не находится, то .indexOf возвращает значение -1, и если при этом в строке содержатся числа, то строка является полностью арабасским выражением.
-    public static boolean arabic_or_roman(String example) throws Exception {
+    public static boolean arabic_or_roman(String expressionMassive) throws Exception {
         String romanExample = "IVXLC";
-        if (romanExample.indexOf(example.charAt(0)) != -1 && !example.matches("(.*)(\\d+)(.*)"))
+        if (romanExample.indexOf(expressionMassive.charAt(0)) != -1 && !expressionMassive.matches("(.*)(\\d+)(.*)"))
             return true;
-        if (romanExample.indexOf(example.charAt(0)) == -1 && example.matches("(.*)(\\d+)(.*)"))
+        if (romanExample.indexOf(expressionMassive.charAt(0)) == -1 && expressionMassive.matches("(.*)(\\d+)(.*)"))
             return false;
-        if (romanExample.indexOf(example.charAt(0)) != -1 && example.matches("(.*)(\\d+)(.*)"))
+        if (romanExample.indexOf(expressionMassive.charAt(0)) != -1 && expressionMassive.matches("(.*)(\\d+)(.*)"))
             throw new Exception("Используются одновременно разные системы счисления");
         return false;
     }
