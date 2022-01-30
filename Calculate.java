@@ -5,44 +5,39 @@ public class Calculate extends Calculator {
     public void calculateArabic(int num1, int num2, String operation) throws Exception {
         int result = 0;
         if (num1 < 0 || num1 > 10 || num2 < 0 || num2 > 10) throw new Exception("Число должно быть от 1 до 10");
-            switch (operation) {
-                case "+": result = num1 + num2;
-                    break;
-                case "-": result =  num1 - num2;
-                    break;
-                case "*": result = num1 * num2;
-                    break;
-                case "/": result = num1 / num2;
-                    break;
-                default:
-                    throw new Exception("неверный знак операции");
-        }
+        result = switch (operation) {
+            case "+" -> num1 + num2;
+            case "-" -> num1 - num2;
+            case "*" -> num1 * num2;
+            case "/" -> num1 / num2;
+            default -> throw new Exception("неверный знак операции");
+        };
         System.out.println("Ответ = " + result);
     }
     //Берет первый символ из вводимой строки и ищет этот символ в строке римских числел romanExample, если находит одинаковый символ
     // и в строке отстутствуют числа (с помошью регулярных выражений), возвращает значение true и строка является полностью римским выражением.
     //Если символ не находится, то .indexOf возвращает значение -1, и если при этом в строке содержатся числа, то строка является полностью арабасским выражением.
-    public static boolean arabic_or_roman(String expressionMassive) throws Exception {
+    public static boolean arabic_or_roman(String expression) throws Exception {
         String romanExample = "IVXLC";
-        if (romanExample.indexOf(expressionMassive.charAt(0)) != -1 && !expressionMassive.matches("(.*)(\\d+)(.*)"))
+        if (romanExample.indexOf(expression.charAt(0)) != -1 && !expression.matches("(.*)(\\d+)(.*)"))
             return true;
-        if (romanExample.indexOf(expressionMassive.charAt(0)) == -1 && expressionMassive.matches("(.*)(\\d+)(.*)"))
+        if (romanExample.indexOf(expression.charAt(0)) == -1 && expression.matches("(.*)(\\d+)(.*)"))
             return false;
-        if (romanExample.indexOf(expressionMassive.charAt(0)) != -1 && expressionMassive.matches("(.*)(\\d+)(.*)"))
+        if (romanExample.indexOf(expression.charAt(0)) != -1 && expression.matches("(.*)(\\d+)(.*)"))
             throw new Exception("Используются одновременно разные системы счисления");
         return false;
     }
 
     // перевод одиночныйх основных римских символов в число
     public static int decodingRomanSingleChar(char romanChar) {
-        switch (romanChar) {
-            case 'I': return 1;
-            case 'V': return 5;
-            case 'X': return 10;
-            case 'L': return 50;
-            case 'C': return 100;
-            default: return 0;
-        }
+        return switch (romanChar) {
+            case 'I' -> 1;
+            case 'V' -> 5;
+            case 'X' -> 10;
+            case 'L' -> 50;
+            case 'C' -> 100;
+            default -> 0;
+        };
     }
     //перевод арабского числа в римский символ, если число <1 выбрасывается исключение
     public static String integerToRomanNumeral(int input) throws Exception {
